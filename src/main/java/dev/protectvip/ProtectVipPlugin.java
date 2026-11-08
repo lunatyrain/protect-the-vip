@@ -170,7 +170,7 @@ public final class ProtectVipPlugin extends JavaPlugin implements Listener, TabE
     }
 
     private Component timerTitle() {
-        return Component.text("Keep the VIP alive: ", NamedTextColor.GOLD, TextDecoration.BOLD)
+        return Component.text("Protect the VIP: ", NamedTextColor.GOLD, TextDecoration.BOLD)
                 .append(Component.text(fmt(remaining), NamedTextColor.WHITE));
     }
 
@@ -218,18 +218,16 @@ public final class ProtectVipPlugin extends JavaPlugin implements Listener, TabE
         var a = from.getLocation();
         var b = vipP.getLocation();
         double dx = b.getX() - a.getX(), dz = b.getZ() - a.getZ();
-        double flat = Math.sqrt(dx * dx + dz * dz);
-        double dy = b.getY() - a.getY();
+        double dist = a.distance(b);
 
         double targetYaw = Math.toDegrees(Math.atan2(-dx, dz));
         double diff = ((targetYaw - a.getYaw()) % 360 + 540) % 360 - 180;     // -180..180, 0 = straight ahead
         int idx = (int) Math.floorMod(Math.round(diff / 45.0), 8);
 
-        String vert = Math.abs(dy) < 3 ? "" : (dy > 0 ? "  ⬆ " : "  ⬇ ") + Math.round(Math.abs(dy)) + "m";
         return Component.text("VIP ", NamedTextColor.GOLD, TextDecoration.BOLD)
                 .append(Component.text(vipP.getName() + "  ", NamedTextColor.WHITE).decoration(TextDecoration.BOLD, false))
                 .append(Component.text(ARROWS[idx] + " ", NamedTextColor.AQUA, TextDecoration.BOLD))
-                .append(Component.text(Math.round(flat) + "m" + vert, NamedTextColor.YELLOW).decoration(TextDecoration.BOLD, false));
+                .append(Component.text(Math.round(dist) + "m", NamedTextColor.YELLOW).decoration(TextDecoration.BOLD, false));
     }
 
     private static boolean holdingCompass(Player p) {
@@ -320,7 +318,7 @@ public final class ProtectVipPlugin extends JavaPlugin implements Listener, TabE
                     return true;
                 }
                 setVip(target);
-                Bukkit.broadcast(Component.text(target.getName() + " is now the VIP! Protect them, or hunt them. Use /track.",
+                Bukkit.broadcast(Component.text(target.getName() + " is now VIP! Protect them or hunt them using /track",
                         NamedTextColor.GOLD, TextDecoration.BOLD));
             }
             case "timer" -> {
