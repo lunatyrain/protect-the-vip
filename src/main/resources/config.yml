@@ -1,0 +1,6 @@
+vip: ""                      # UUID of the current VIP (managed by /vip set and /vip clear)
+glow-color: GOLD             # outline color: any Minecraft color name (GOLD, RED, AQUA, ...)
+end-on-death: true           # clear the VIP and announce the result when the VIP dies
+give-compass-on-join: false  # give every player a tracker compass when they join
+actionbar-interval-ticks: 10 # how often the tracker updates (20 ticks = 1 second)
+round-seconds: 600          # how long the VIP must survive (0 = no timer). Change in game with /vip timer <time>

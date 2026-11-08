@@ -1,0 +1,19 @@
+name: ProtectTheVIP
+version: '${version}'
+main: dev.protectvip.ProtectVipPlugin
+api-version: '26.2'
+description: One player is the VIP. They glow through walls and everyone can track them.
+commands:
+  vip:
+    description: Manage the VIP
+    usage: /vip <set <player>|timer <time|off>|clear|info>
+    permission: protectvip.admin
+  track:
+    description: Get a VIP tracking compass
+    usage: /track
+    permission: protectvip.track
+permissions:
+  protectvip.admin:
+    default: op
+  protectvip.track:
+    default: true
